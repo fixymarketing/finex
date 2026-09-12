@@ -74,12 +74,14 @@
   .hero-grid{display:grid;grid-template-columns:1fr 210px;gap:40px;align-items:center}
   .hero h1{font-size:46px;font-weight:800;margin:18px 0 20px;max-width:560px}
   .hero h1 em{font-style:normal;color:var(--teal)}
+  br.brm{display:none}
   .hero p.lead{font-size:16px;color:#CBD8E6;max-width:470px;margin-bottom:30px}
   .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
   .hero-tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:34px;font-size:12px;color:#93A8BF}
   .hero-tags span::after{content:"·";margin-left:10px}
   .hero-tags span:last-child::after{content:""}
   .hero-side{text-align:right;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#B9C9DA;font-weight:600}
+  .hero-side .hs-list span{display:block}
   .hero-side .quote{margin-top:26px;padding-top:18px;border-top:2px solid var(--yellow);font-size:13px;letter-spacing:0;text-transform:none;color:#DCE7F2;font-weight:400;font-style:italic}
   .hero-side .mark{margin-top:34px}
   .hero-side .mark b{display:block;color:#fff;font-size:26px;font-weight:800;letter-spacing:.02em}
@@ -220,6 +222,13 @@
   }
   @media(max-width:560px){
     .cards6,.cards4,.steps,.stats-grid,.checks{grid-template-columns:1fr}
+    br.brm{display:inline}
+    br.brd{display:none}
+    .hero-side .hs-list{display:flex;flex-wrap:nowrap;align-items:center;justify-content:flex-start;gap:0 6px;font-size:clamp(8px,2.4vw,11px);letter-spacing:.03em;white-space:nowrap}
+    .hero-side .hs-list span{display:inline}
+    .hero-side .hs-list span+span::before{content:"•";margin-right:6px;color:var(--yellow)}
+    .hero-ctas{flex-wrap:nowrap;gap:10px}
+    .hero-ctas .btn{flex:1 1 0;justify-content:center;text-align:center;padding:13px 10px;font-size:13px;gap:6px}
     .stat{border-right:0;border-bottom:1px solid var(--line)}
   }
 </style>
@@ -252,7 +261,7 @@
     <div class="hero-grid">
       <div>
         <p class="eyebrow" style="color:#9FB4CA">Comercio internacional<br>para un mundo de oportunidades</p>
-        <h1>Tu próximo mercado puede estar del otro lado <em>de una frontera.</em></h1>
+        <h1>Tu próximo<br class="brm">mercado<br class="brm">puede estar<br class="brm">del otro lado<br class="brm"> <em>de una frontera.</em></h1>
         <p class="lead">Conectamos productos, proveedores y negocios con nuevas oportunidades internacionales.</p>
         <div class="hero-ctas">
           <a href="#importar" class="btn btn-y">Quiero importar →</a>
@@ -263,7 +272,7 @@
         </div>
       </div>
       <div class="hero-side">
-        PRODUCTOS<br>MERCADOS<br>SOLUCIONES<br>SIN FRONTERAS
+        <div class="hs-list"><span>PRODUCTOS</span><span>MERCADOS</span><span>SOLUCIONES<br class="brd"> SIN FRONTERAS</span></div>
         <div class="quote">“El mundo también puede ser tu mercado.”</div>
         <div class="mark"><img class="logo-img lg" src="logo-finex-blanco.png" alt="FINEX Global Trade" style="margin-left:auto"></div>
       </div>
