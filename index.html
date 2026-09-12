@@ -61,7 +61,8 @@
   .menu a:hover{color:var(--teal)}
   .nav-right{display:flex;align-items:center;gap:18px}
   .nav-right .btn{padding:11px 20px;font-size:13px}
-  .burger{display:none;background:none;border:0;color:#fff;font-size:26px;cursor:pointer}
+  .burger{display:none;background:none;border:0;color:#fff;font-size:26px;line-height:1;cursor:pointer;padding:4px 6px}
+  .menu-cta{display:none}
 
   /* ---------- hero ---------- */
   .hero{position:relative;background:var(--navy);color:#fff;min-height:560px;display:flex;align-items:center;overflow:hidden}
@@ -210,6 +211,16 @@
   }
   @media(max-width:820px){
     .menu,.nav-right .btn{display:none}
+    .nav{height:64px}
+    body.nav-open .menu{display:flex;flex-direction:column;align-items:stretch;gap:0;
+      position:absolute;top:100%;left:0;right:0;background:var(--navy);
+      padding:6px 24px 18px;border-top:1px solid rgba(255,255,255,.14);
+      box-shadow:0 14px 28px rgba(0,0,0,.28);z-index:60}
+    body.nav-open .menu a{padding:14px 0;font-size:15px;border-bottom:1px solid rgba(255,255,255,.08)}
+    body.nav-open .menu a:last-child{border-bottom:0}
+    body.nav-open .menu .menu-cta{display:block;margin-top:14px;background:var(--yellow);color:#1a1200;
+      font-weight:700;text-align:center;border-radius:6px;padding:13px 0;border-bottom:0}
+    body.nav-open .burger{color:var(--teal)}
     .burger{display:block}
     .hero-grid,.intro-grid,.process-top,.biz-grid,.eco-grid,.cta .wrap{grid-template-columns:1fr}
     .hero h1{font-size:34px}
@@ -221,7 +232,14 @@
     .intro h2,.biz h2{font-size:26px}
   }
   @media(max-width:560px){
-    .cards6,.cards4,.steps,.stats-grid,.checks{grid-template-columns:1fr}
+    .cards6,.cards4,.steps,.checks{grid-template-columns:1fr}
+    .stats-grid{grid-template-columns:1fr 1fr}
+    .stat{padding:20px 12px;gap:10px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .stat:nth-child(2n){border-right:0}
+    .stat:nth-child(n+3){border-bottom:0}
+    .stat .ic{width:24px;height:24px}
+    .stat b{font-size:19px}
+    .stat small{font-size:11px;line-height:1.35;display:block}
     br.brm{display:inline}
     br.brd{display:none}
     .hero-side .hs-list{display:flex;flex-wrap:nowrap;align-items:center;justify-content:flex-start;gap:0 6px;font-size:clamp(8px,2.4vw,11px);letter-spacing:.03em;white-space:nowrap}
@@ -229,7 +247,6 @@
     .hero-side .hs-list span+span::before{content:"•";margin-right:6px;color:var(--yellow)}
     .hero-ctas{flex-wrap:nowrap;gap:10px}
     .hero-ctas .btn{flex:1 1 0;justify-content:center;text-align:center;padding:13px 10px;font-size:13px;gap:6px}
-    .stat{border-right:0;border-bottom:1px solid var(--line)}
   }
 </style>
 </head>
@@ -244,10 +261,11 @@
       <a href="#servicios">Servicios</a>
       <a href="#importar">Importar</a>
       <a href="#exportar">Exportar</a>
+      <a class="menu-cta" href="https://wa.me/5491131756718" target="_blank" rel="noopener">Cotizar operación →</a>
     </nav>
     <div class="nav-right">
       <a href="https://wa.me/5491131756718" target="_blank" rel="noopener" class="btn btn-y">Cotizar operación</a>
-      <button class="burger" onclick="document.querySelector('.menu').style.display='flex'">☰</button>
+      <button class="burger" id="burger" aria-label="Menú" aria-expanded="false">☰</button>
     </div>
   </div>
 </header>
@@ -496,6 +514,25 @@
     </div>
   </div>
 </footer>
+
+<script>
+  (function(){
+    var b=document.getElementById('burger');
+    if(!b) return;
+    b.addEventListener('click',function(){
+      var open=document.body.classList.toggle('nav-open');
+      b.setAttribute('aria-expanded',open);
+      b.textContent=open?'✕':'☰';
+    });
+    document.querySelectorAll('.menu a').forEach(function(a){
+      a.addEventListener('click',function(){
+        document.body.classList.remove('nav-open');
+        b.setAttribute('aria-expanded','false');
+        b.textContent='☰';
+      });
+    });
+  })();
+</script>
 
 </body>
 </html>
